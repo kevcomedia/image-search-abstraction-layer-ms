@@ -12,6 +12,7 @@ app.get('/search', function(req, res) {
   const cx = process.env.SEARCH_CX;
   const key = process.env.SEARCH_KEY;
   const q = req.query.q;
+  const start = req.query.offset ? Number.parseInt(req.query.offset) : 1;
 
   const options = {
     uri: 'https://www.googleapis.com/customsearch/v1',
@@ -19,6 +20,7 @@ app.get('/search', function(req, res) {
       cx,
       key,
       q,
+      start,
       searchType: 'image',
     },
     json: true,

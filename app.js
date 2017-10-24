@@ -39,7 +39,7 @@ app.get('/search', function(req, res) {
       .then(function(data) {
         const recent = new Recent({
           query: q,
-          timestamp: moment.utc().format(),
+          timestamp: moment.utc(),
         });
         return recent.save().then(() => data);
       })

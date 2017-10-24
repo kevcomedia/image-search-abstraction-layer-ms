@@ -6,9 +6,7 @@ const Recent = require('./models/recent');
 const moment = require('moment');
 const request = require('request-promise-native');
 
-app.get('/', function(req, res) {
-  res.send('Hello world');
-});
+app.use(express.static('public'));
 
 app.get('/search', function(req, res) {
   const cx = process.env.SEARCH_CX;

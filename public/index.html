@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>freeCodeCamp API Project - Image Search Abstraction Layer</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Image Search Abstraction Layer</h1>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <section class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">Image search</h2>
+          </div>
+          <div class="panel-body">
+            <p class="lead">
+              <code>/search?q=<b>searchTerm</b>[&amp;offset=<b>number</b>]</code>
+            </p>
+
+            <h4>Examples</h4>
+            <p><code>/search?q=tuna sandwich</code></p>
+            <p><code>/search?q=funny tuna?offset=2</code></p>
+
+            <h4>Output</h4>
+            <p>An array of ten results with the following details:</p>
+            <dl class="dl-horizontal">
+              <dt><code>url</code></dt>
+              <dd>A URL that points to the image.</dd>
+              <dt><code>alt</code></dt>
+              <dd>The title of the page the image appears in.</dd>
+              <dt><code>context</code></dt>
+              <dd>A URL that points to the page that contains the image.</dd>
+            </dl>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-sm-6">
+        <section class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">Recent searches</h2>
+          </div>
+          <div class="panel-body">
+            <p class="lead"><code>/recent</code></p>
+
+            <h4>Output</h4>
+            <p>An array of the last ten searches and their timestamps.</p>
+            <dl class="dl-horizontal">
+              <dt><code>query</code></dt>
+              <dd>The search term.</dd>
+              <dt><code>timestamp</code></dt>
+              <dd>The date and time the search was made.</dd>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

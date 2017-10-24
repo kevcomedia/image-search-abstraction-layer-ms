@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 
-require('dotenv').config();
+const Recent = require('./models/recent');
+
+const moment = require('moment');
 const request = require('request-promise-native');
 
 app.get('/', function(req, res) {
@@ -28,14 +30,37 @@ app.get('/search', function(req, res) {
 
   request(options)
       .then(function(data) {
-        res.json(data.items.map((item) => ({
+        return data.items.map((item) => ({
           url: item.link,
           alt: item.snippet,
           context: item.image.contextLink,
-        })));
+        }));
+      })
+      .then(function(data) {
+        const recent = new Recent({
+          query: q,
+          timestamp: moment.utc(),
+        });
+        return recent.save().then(() => data);
+      })
+      .then(function(data) {
+        res.json(data);
       })
       .catch(function(err) {
         res.sendStatus(400);
+      });
+});
+
+app.get('/recent', function(req, res) {
+  Recent.find({})
+      .select({_id: 0, query: 1, timestamp: 1})
+      .limit(10)
+      .sort({timestamp: -1})
+      .then(function(recentQueries) {
+        res.json(recentQueries);
+      })
+      .catch(function(error) {
+        res.sendStatus(500);
       });
 });
 

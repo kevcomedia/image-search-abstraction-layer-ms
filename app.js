@@ -51,4 +51,17 @@ app.get('/search', function(req, res) {
       });
 });
 
+app.get('/recent', function(req, res) {
+  Recent.find({})
+      .select({_id: 0, query: 1, timestamp: 1})
+      .limit(10)
+      .sort({timestamp: -1})
+      .then(function(recentQueries) {
+        res.json(recentQueries);
+      })
+      .catch(function(error) {
+        res.sendStatus(500);
+      });
+});
+
 module.exports = app;
